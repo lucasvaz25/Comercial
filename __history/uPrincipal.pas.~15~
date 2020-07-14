@@ -1,0 +1,70 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Menus,
+  Vcl.ExtCtrls,
+  UDTMConexao;
+
+type
+  TfrmPrincipal = class( TForm )
+    MainPrincipal: TMainMenu;
+    Cadastro1: TMenuItem;
+    Movimentao1: TMenuItem;
+    Relatrio1: TMenuItem;
+    Clientes1: TMenuItem;
+    N1: TMenuItem;
+    Categoria1: TMenuItem;
+    Produtos1: TMenuItem;
+    N2: TMenuItem;
+    Fechar1: TMenuItem;
+    Vendas1: TMenuItem;
+    Clientes2: TMenuItem;
+    N3: TMenuItem;
+    Produtos2: TMenuItem;
+    N4: TMenuItem;
+    VendaporDAta1: TMenuItem;
+    PnlFundo: TPanel;
+    procedure Fechar1Click( Sender: TObject );
+    procedure FormCreate( Sender: TObject );
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPrincipal.Fechar1Click( Sender: TObject );
+begin
+  Close;
+end;
+
+procedure TfrmPrincipal.FormCreate( Sender: TObject );
+begin
+  DtmConexao                        := TdtmConexao.Create( Self );
+  DtmConexao.ConexaoDB.SQLHourGlass := True;
+  DtmConexao.ConexaoDB.Protocol := 'mssql';
+  DtmConexao.ConexaoDB.LibraryLocation := 'C:\Users\ll\OneDrive\Documentos\ProjetoComercial\ntwdblib.dll';
+  DtmConexao.ConexaoDB.HostName := '.\SERVERCURSO';
+  DtmConexao.ConexaoDB.Port := 1433;
+
+  DtmConexao.ConexaoDB.Connected    := True;
+end;
+
+end.

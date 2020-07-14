@@ -1,0 +1,18 @@
+object dtmConexao: TdtmConexao
+  OldCreateOrder = False
+  Height = 352
+  Width = 529
+  object ConexaoDB: TZConnection
+    ControlsCodePage = cCP_UTF16
+    AutoEncodeStrings = True
+    Catalog = ''
+    HostName = ''
+    Port = 0
+    Database = ''
+    User = ''
+    Password = ''
+    Protocol = 'mssql'
+    Left = 216
+    Top = 88
+  end
+end

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2020/07/13 22:17:43.933,=C:\Users\ll\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 22:18:33.055,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\uPrincipal.dfm=C:\Users\ll\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/07/13 22:18:33.055,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\uPrincipal.pas=C:\Users\ll\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 22:20:00.549,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Vendas.dproj=C:\Users\ll\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/07/13 22:31:34.242,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 22:32:58.566,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\dataModule\uDTMConexao.dfm=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.dfm</Transaction>
+    <Transaction>2020/07/13 22:32:58.566,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\dataModule\uDTMConexao.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 22:57:31.079,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 22:58:10.408,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\heranca\uTelaHeranca.dfm=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.dfm</Transaction>
+    <Transaction>2020/07/13 22:58:10.408,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\heranca\uTelaHeranca.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 23:39:03.953,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 23:39:53.145,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\cadastro\uCadCategoria.dfm=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.dfm</Transaction>
+    <Transaction>2020/07/13 23:39:53.145,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\cadastro\uCadCategoria.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
