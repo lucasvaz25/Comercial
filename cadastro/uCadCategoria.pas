@@ -10,6 +10,8 @@ uses
 
 type
   TfrmCadCategoria = class(TfrmTelaHeranca)
+    QryListagemcategoria: TIntegerField;
+    QryListagemDescricao: TWideStringField;
   private
     { Private declarations }
   public

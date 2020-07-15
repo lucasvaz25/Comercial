@@ -14,7 +14,8 @@ uses
   Vcl.Dialogs,
   Vcl.Menus,
   Vcl.ExtCtrls,
-  uCadCategoria,
+  UCadCategoria,
+  Enter,
   UDTMConexao;
 
 type
@@ -38,9 +39,11 @@ type
     PnlFundo: TPanel;
     procedure Fechar1Click( Sender: TObject );
     procedure FormCreate( Sender: TObject );
-    procedure Categoria1Click(Sender: TObject);
+    procedure Categoria1Click( Sender: TObject );
+    procedure FormClose( Sender: TObject; var Action: TCloseAction );
   private
     { Private declarations }
+    TeclaEnter: TMREnter;
     procedure ConexaoDB;
   public
     { Public declarations }
@@ -53,11 +56,11 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmPrincipal.Categoria1Click(Sender: TObject);
+procedure TfrmPrincipal.Categoria1Click( Sender: TObject );
 begin
-  frmCadCategoria := TFrmCadCategoria.Create(Self);
-  frmCadCategoria.ShowModal;
-  frmCadCategoria.Release;
+  FrmCadCategoria := TFrmCadCategoria.Create( Self );
+  FrmCadCategoria.ShowModal;
+  FrmCadCategoria.Release;
 end;
 
 procedure TfrmPrincipal.ConexaoDB;
@@ -83,9 +86,18 @@ begin
   Close;
 end;
 
+procedure TfrmPrincipal.FormClose( Sender: TObject; var Action: TCloseAction );
+begin
+  FreeandNil( TeclaEnter );
+  FreeAndNil( DtmConexao );
+end;
+
 procedure TfrmPrincipal.FormCreate( Sender: TObject );
 begin
   Self.ConexaoDB;
+  TeclaEnter              := TMREnter.Create( Self );
+  TeclaEnter.FocusEnabled := True;
+  TeclaEnter.FocusColor   := ClinfoBk;
 end;
 
 end.

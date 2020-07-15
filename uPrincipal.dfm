@@ -13,6 +13,7 @@ object frmPrincipal: TfrmPrincipal
   Menu = mainPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -25,10 +26,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 280
-    ExplicitTop = 152
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
   object mainPrincipal: TMainMenu
     Left = 24

@@ -13,6 +13,8 @@ object frmTelaHeranca: TfrmTelaHeranca
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pgcPrincipal: TPageControl
@@ -23,14 +25,8 @@ object frmTelaHeranca: TfrmTelaHeranca
     ActivePage = TabListagem
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 734
-    ExplicitHeight = 357
     object TabListagem: TTabSheet
       Caption = 'Listagem'
-      ExplicitLeft = 8
-      ExplicitTop = 22
-      ExplicitWidth = 726
-      ExplicitHeight = 329
       object pnlListagemTopo: TPanel
         Left = 0
         Top = 0
@@ -40,11 +36,22 @@ object frmTelaHeranca: TfrmTelaHeranca
         Color = clGradientInactiveCaption
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 24
-        ExplicitTop = 3
+        object lblIndice: TLabel
+          Left = 11
+          Top = 8
+          Width = 94
+          Height = 13
+          Caption = 'CampoPesquisar'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object mskPesquisar: TMaskEdit
           Left = 8
-          Top = 16
+          Top = 25
           Width = 369
           Height = 21
           TabOrder = 0
@@ -53,7 +60,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         end
         object btnPesquisar: TBitBtn
           Left = 392
-          Top = 14
+          Top = 23
           Width = 75
           Height = 25
           Caption = '&Pesquisar'
@@ -66,20 +73,27 @@ object frmTelaHeranca: TfrmTelaHeranca
         Width = 817
         Height = 306
         Align = alClient
+        Color = clActiveCaption
         DataSource = DTSListagem
+        GradientStartColor = clGradientActiveCaption
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
+        TitleFont.Style = [fsBold]
+        OnTitleClick = grdListagemTitleClick
       end
     end
     object tabManutencao: TTabSheet
       Caption = 'Manuten'#231#227'o'
       ImageIndex = 1
-      ExplicitWidth = 726
-      ExplicitHeight = 329
     end
   end
   object pnlRodape: TPanel
@@ -91,9 +105,9 @@ object frmTelaHeranca: TfrmTelaHeranca
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 272
-    ExplicitTop = 288
-    ExplicitWidth = 185
+    DesignSize = (
+      825
+      41)
     object btnNovo: TBitBtn
       Left = 4
       Top = 6
@@ -101,6 +115,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       Height = 25
       Caption = '&Novo'
       TabOrder = 0
+      OnClick = btnNovoClick
     end
     object btnAlterar: TBitBtn
       Left = 85
@@ -109,6 +124,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       Height = 25
       Caption = '&Alterar'
       TabOrder = 1
+      OnClick = btnAlterarClick
     end
     object btnCancelar: TBitBtn
       Left = 166
@@ -117,6 +133,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       Height = 25
       Caption = '&Cancelar'
       TabOrder = 2
+      OnClick = btnCancelarClick
     end
     object btnGravar: TBitBtn
       Left = 247
@@ -125,6 +142,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       Height = 25
       Caption = '&Gravar'
       TabOrder = 3
+      OnClick = btnGravarClick
     end
     object btnApagar: TBitBtn
       Left = 328
@@ -133,12 +151,14 @@ object frmTelaHeranca: TfrmTelaHeranca
       Height = 25
       Caption = 'Apaga&r'
       TabOrder = 4
+      OnClick = btnApagarClick
     end
     object btnFechar: TBitBtn
       Left = 736
       Top = 6
       Width = 75
       Height = 25
+      Anchors = [akTop, akRight]
       Caption = '&Fechar'
       TabOrder = 5
       OnClick = btnFecharClick
@@ -155,6 +175,8 @@ object frmTelaHeranca: TfrmTelaHeranca
   end
   object QryListagem: TZQuery
     Connection = dtmConexao.ConexaoDB
+    SQL.Strings = (
+      '')
     Params = <>
     Left = 500
     Top = 24
