@@ -1,5 +1,6 @@
 inherited frmCadCategoria: TfrmCadCategoria
   Caption = 'Cadastro de Categorias'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgcPrincipal: TPageControl
@@ -14,7 +15,7 @@ inherited frmCadCategoria: TfrmCadCategoria
           end
           item
             Expanded = False
-            FieldName = 'Descricao'
+            FieldName = 'descricao'
             Width = 321
             Visible = True
           end>
@@ -27,17 +28,18 @@ inherited frmCadCategoria: TfrmCadCategoria
     end
   end
   inherited QryListagem: TZQuery
+    Active = True
     SQL.Strings = (
-      'select categoria, Descricao from categorias')
+      'select categoria, descricao from categorias')
     object QryListagemcategoria: TIntegerField
       DisplayLabel = 'C'#243'digo'
       FieldName = 'categoria'
       ReadOnly = True
     end
-    object QryListagemDescricao: TWideStringField
+    object QryListagemdescricao: TWideStringField
       DisplayLabel = 'Descri'#231#227'o'
-      FieldName = 'Descricao'
-      Size = 30
+      FieldName = 'descricao'
+      Size = 0
     end
   end
 end

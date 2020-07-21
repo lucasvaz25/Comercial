@@ -3,15 +3,34 @@ unit uCadCategoria;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uTelaHeranca, Data.DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.DBCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls, Vcl.ComCtrls;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  UTelaHeranca,
+  Data.DB,
+  ZAbstractRODataset,
+  ZAbstractDataset,
+  ZDataset,
+  Vcl.DBCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.Buttons,
+  Vcl.Mask,
+  Vcl.ExtCtrls,
+  Vcl.ComCtrls;
 
 type
-  TfrmCadCategoria = class(TfrmTelaHeranca)
+  TfrmCadCategoria = class( TfrmTelaHeranca )
     QryListagemcategoria: TIntegerField;
-    QryListagemDescricao: TWideStringField;
+    QryListagemdescricao: TWideStringField;
+    procedure FormCreate( Sender: TObject );
   private
     { Private declarations }
   public
@@ -19,10 +38,16 @@ type
   end;
 
 var
-  frmCadCategoria: TfrmCadCategoria;
+  FrmCadCategoria: TfrmCadCategoria;
 
 implementation
 
 {$R *.dfm}
+
+procedure TfrmCadCategoria.FormCreate( Sender: TObject );
+begin
+  inherited;
+  IndexAtual := 'descricao';
+end;
 
 end.
