@@ -15,6 +15,7 @@ uses
   Vcl.Menus,
   Vcl.ExtCtrls,
   UCadCategoria,
+  UCadCliente,
   Enter,
   UDTMConexao;
 
@@ -41,6 +42,7 @@ type
     procedure FormCreate( Sender: TObject );
     procedure Categoria1Click( Sender: TObject );
     procedure FormClose( Sender: TObject; var Action: TCloseAction );
+    procedure Clientes1Click( Sender: TObject );
   private
     { Private declarations }
     TeclaEnter: TMREnter;
@@ -61,6 +63,13 @@ begin
   FrmCadCategoria := TFrmCadCategoria.Create( Self );
   FrmCadCategoria.ShowModal;
   FrmCadCategoria.Release;
+end;
+
+procedure TfrmPrincipal.Clientes1Click( Sender: TObject );
+begin
+  FrmCadCliente := TFrmCadCliente.Create( Self );
+  FrmCadCliente.ShowModal;
+  FrmCadCliente.Release;
 end;
 
 procedure TfrmPrincipal.ConexaoDB;

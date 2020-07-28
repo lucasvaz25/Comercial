@@ -8,7 +8,9 @@ uses
   uCadCategoria in 'cadastro\uCadCategoria.pas' {frmCadCategoria},
   Enter in 'Enter.pas',
   uEnum in 'heranca\uEnum.pas',
-  UCategoria in 'Classes\UCategoria.pas';
+  UCategoria in 'Classes\UCategoria.pas',
+  UCadCliente in 'cadastro\UCadCliente.pas' {FrmCadCliente},
+  UCliente in 'Classes\UCliente.pas';
 
 {$R *.res}
 

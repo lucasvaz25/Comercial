@@ -1,7 +1,6 @@
 inherited frmCadCategoria: TfrmCadCategoria
   Caption = 'Cadastro de Categorias'
   OnCreate = FormCreate
-  ExplicitTop = -59
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgcPrincipal: TPageControl

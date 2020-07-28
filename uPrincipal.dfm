@@ -34,6 +34,7 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Cadastro'
       object Clientes1: TMenuItem
         Caption = 'Clientes'
+        OnClick = Clientes1Click
       end
       object N1: TMenuItem
         Caption = '-'
