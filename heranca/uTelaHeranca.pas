@@ -23,6 +23,7 @@ uses
   Vcl.Buttons,
   ZAbstractRODataset,
   ZAbstractDataset,
+  RxToolEdit,
   UDTMConexao,
   UEnum,
   ZDataset;
@@ -121,7 +122,12 @@ begin
     if ( Components[ I ] is TLabeledEdit ) then
       TLabeledEdit( Components[ I ] ).Text := EmptyStr
     else if ( Components[ I ] ) is TEdit then
-      TEdit( Components[ I ] ).Text := EmptyStr;
+      TEdit( Components[ I ] ).Text := EmptyStr
+    else if ( Components[ I ] ) is TMaskEdit then
+      TMaskEdit( Components[ I ] ).Text := EmptyStr
+    else if ( Components[ I ] ) is TDateEdit then
+      TDateEdit( Components[ I ] ).Date := 0;
+
   end;
 end;
 
