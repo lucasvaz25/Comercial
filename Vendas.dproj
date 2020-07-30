@@ -125,6 +125,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Classes\UCliente.pas"/>
+        <DCCReference Include="cadastro\uCadProduto.pas">
+            <Form>FrmCadProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Classes\UProduto.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

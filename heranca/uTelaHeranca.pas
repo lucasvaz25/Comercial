@@ -24,6 +24,7 @@ uses
   ZAbstractRODataset,
   ZAbstractDataset,
   RxToolEdit,
+  RxCurrEdit,
   UDTMConexao,
   UEnum,
   ZDataset;
@@ -126,8 +127,13 @@ begin
     else if ( Components[ I ] ) is TMaskEdit then
       TMaskEdit( Components[ I ] ).Text := EmptyStr
     else if ( Components[ I ] ) is TDateEdit then
-      TDateEdit( Components[ I ] ).Date := 0;
-
+      TDateEdit( Components[ I ] ).Date := 0
+    else if ( Components[ I ] ) is TMemo then
+      TMemo( Components[ I ] ).Text := EmptyStr
+    else if ( Components[ I ] ) is TCurrencyEdit then
+      TCurrencyEdit( Components[ I ] ).Value := 0
+    else if ( Components[ I ] ) is TDBLookupComboBox then
+      TDBLookupComboBox( Components[ I ] ).KeyValue := Null;
   end;
 end;
 

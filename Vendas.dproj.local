@@ -24,5 +24,10 @@
     <Transaction>2020/07/25 16:52:22.000.192,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\cadastro\UCadCliente.pas</Transaction>
     <Transaction>2020/07/25 17:18:08.000.026,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
     <Transaction>2020/07/25 17:18:22.000.596,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Classes\UCliente.pas</Transaction>
+    <Transaction>2020/07/29 23:25:50.952,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/29 23:26:08.898,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\cadastro\uCadProduto.dfm=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.dfm</Transaction>
+    <Transaction>2020/07/29 23:26:08.898,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\cadastro\uCadProduto.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/29 23:53:45.196,=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
+    <Transaction>2020/07/29 23:54:01.355,C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Classes\UProduto.pas=C:\Users\ll\OneDrive\Documentos\ProjetoComercial\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

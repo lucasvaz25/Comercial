@@ -38,7 +38,10 @@ type
     procedure SetEstado( const Value: string );
     procedure SetNome( const Value: string );
     procedure SetTelefone( const Value: string );
+    procedure FieldToObj( Qry: TZQuery );
+    procedure ObjToField( Qry: TZQuery );
   public
+    IsInserir: Boolean;
     constructor Create( _ConnectionDB: TZConnection );
     destructor Destroy; Override;
 
@@ -84,6 +87,7 @@ var
 begin
   try
     Result         := True;
+    IsInserir      := False;
     Qry            := TZQuery.Create( nil );
     Qry.Connection := ConnectionDB;
     Qry.SQL.Clear;
@@ -93,16 +97,7 @@ begin
     Qry.SQL.Add
       ( 'telefone = :telefone, email = :email, dataNascimento = :dataNascimento' );
     Qry.SQL.Add( ' WHERE clienteId = :clienteId' );
-    Qry.ParamByName( 'clienteId' ).AsInteger       := Self.FCodigo;
-    Qry.ParamByName( 'nome' ).AsString             := Self.FNome;
-    Qry.ParamByName( 'endereco' ).AsString         := Self.FEndereco;
-    Qry.ParamByName( 'cidade' ).AsString           := Self.FCidade;
-    Qry.ParamByName( 'estado' ).AsString           := Self.FEstado;
-    Qry.ParamByName( 'bairro' ).AsString           := Self.FBairro;
-    Qry.ParamByName( 'cep' ).AsString              := Self.FCEP;
-    Qry.ParamByName( 'telefone' ).AsString         := Self.FTelefone;
-    Qry.ParamByName( 'email' ).AsString            := Self.FEmail;
-    Qry.ParamByName( 'dataNascimento' ).AsDateTime := Self.FDataNascimento;
+    Self.ObjToField( Qry );
     try
       Qry.ExecSQL;
     Except
@@ -145,12 +140,27 @@ begin
   end;
 end;
 
+procedure TCliente.FieldToObj( Qry: TZQuery );
+begin
+  Self.FCodigo         := Qry.FieldByName( 'clienteId' ).AsInteger;
+  Self.FNome           := Qry.FieldByName( 'nome' ).AsString;
+  Self.FEndereco       := Qry.FieldByName( 'endereco' ).AsString;
+  Self.FCidade         := Qry.FieldByName( 'cidade' ).AsString;
+  Self.FEstado         := Qry.FieldByName( 'estado' ).AsString;
+  Self.FBairro         := Qry.FieldByName( 'bairro' ).AsString;
+  Self.FCEP            := Qry.FieldByName( 'cep' ).AsString;
+  Self.FTelefone       := Qry.FieldByName( 'telefone' ).AsString;
+  Self.FEmail          := Qry.FieldByName( 'email' ).AsString;
+  Self.FDataNascimento := Qry.FieldByName( 'dataNascimento' ).AsDateTime;
+end;
+
 function TCliente.Inserir: Boolean;
 var
   Qry: TZQuery;
 begin
   try
     Result         := True;
+    IsInserir      := True;
     Qry            := TZQuery.Create( nil );
     Qry.Connection := ConnectionDB;
     Qry.SQL.Clear;
@@ -159,15 +169,7 @@ begin
     Qry.SQL.Add( ' values ' );
     Qry.SQL.Add( '( :nome, :endereco, :cidade, :bairro,' );
     Qry.SQL.Add( ' :estado, :cep, :telefone, :email, :dataNascimento)' );
-    Qry.ParamByName( 'nome' ).AsString             := Self.FNome;
-    Qry.ParamByName( 'endereco' ).AsString         := Self.FEndereco;
-    Qry.ParamByName( 'cidade' ).AsString           := Self.FCidade;
-    Qry.ParamByName( 'estado' ).AsString           := Self.FEstado;
-    Qry.ParamByName( 'bairro' ).AsString           := Self.FBairro;
-    Qry.ParamByName( 'cep' ).AsString              := Self.FCEP;
-    Qry.ParamByName( 'telefone' ).AsString         := Self.FTelefone;
-    Qry.ParamByName( 'email' ).AsString            := Self.FEmail;
-    Qry.ParamByName( 'dataNascimento' ).AsDateTime := Self.FDataNascimento;
+    Self.ObjToField( Qry );
     try
       Qry.ExecSQL;
     Except
@@ -177,6 +179,22 @@ begin
     if Assigned( Qry ) then
       FreeAndNil( Qry );
   end;
+end;
+
+procedure TCliente.ObjToField( Qry: TZQuery );
+begin
+  if not IsInserir then
+    Qry.ParamByName( 'clienteId' ).AsInteger := Self.FCodigo;
+
+  Qry.ParamByName( 'nome' ).AsString             := Self.FNome;
+  Qry.ParamByName( 'endereco' ).AsString         := Self.FEndereco;
+  Qry.ParamByName( 'cidade' ).AsString           := Self.FCidade;
+  Qry.ParamByName( 'estado' ).AsString           := Self.FEstado;
+  Qry.ParamByName( 'bairro' ).AsString           := Self.FBairro;
+  Qry.ParamByName( 'cep' ).AsString              := Self.FCEP;
+  Qry.ParamByName( 'telefone' ).AsString         := Self.FTelefone;
+  Qry.ParamByName( 'email' ).AsString            := Self.FEmail;
+  Qry.ParamByName( 'dataNascimento' ).AsDateTime := Self.FDataNascimento;
 end;
 
 function TCliente.Selecionar( ID: Integer ): Boolean;
@@ -193,16 +211,7 @@ begin
     Qry.ParamByName( 'clienteId' ).AsInteger := ID;
     try
       Qry.Open;
-      Self.FCodigo         := Qry.FieldByName( 'clienteId' ).AsInteger;
-      Self.FNome           := Qry.FieldByName( 'nome' ).AsString;
-      Self.FEndereco       := Qry.FieldByName( 'endereco' ).AsString;
-      Self.FCidade         := Qry.FieldByName( 'cidade' ).AsString;
-      Self.FEstado         := Qry.FieldByName( 'estado' ).AsString;
-      Self.FBairro         := Qry.FieldByName( 'bairro' ).AsString;
-      Self.FCEP            := Qry.FieldByName( 'cep' ).AsString;
-      Self.FTelefone       := Qry.FieldByName( 'telefone' ).AsString;
-      Self.FEmail          := Qry.FieldByName( 'email' ).AsString;
-      Self.FDataNascimento := Qry.FieldByName( 'dataNascimento' ).AsDateTime;
+      Self.FieldToObj( Qry );
     Except
       Result := False;
     end;

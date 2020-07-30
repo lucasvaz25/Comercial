@@ -157,6 +157,7 @@ begin
   end;
 end;
 {$ENDREGION}
+{$REGION 'GETs and SETs'}
 
 procedure TCategoria.SetCodigo( const Value: Integer );
 begin
@@ -167,5 +168,6 @@ procedure TCategoria.SetDescricao( const Value: String );
 begin
   FDescricao := Value;
 end;
+{$ENDREGION}
 
 end.

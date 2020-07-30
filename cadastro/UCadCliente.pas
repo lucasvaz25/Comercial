@@ -57,6 +57,7 @@ type
     procedure FormCreate( Sender: TObject );
     procedure FormClose( Sender: TObject; var Action: TCloseAction );
     procedure BtnAlterarClick( Sender: TObject );
+    procedure BtnNovoClick( Sender: TObject );
   private
     { Private declarations }
     Cliente: TCliente;
@@ -95,6 +96,13 @@ begin
     Abort;
   end;
   inherited;
+end;
+
+procedure TFrmCadCliente.BtnNovoClick( Sender: TObject );
+begin
+  inherited;
+  EdtDataNascimento.Date := Date;
+  EdtNome.SetFocus;
 end;
 
 function TFrmCadCliente.Excluir: Boolean;
