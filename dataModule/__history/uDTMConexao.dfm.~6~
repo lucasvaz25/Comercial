@@ -1,0 +1,51 @@
+object dtmConexao: TdtmConexao
+  OldCreateOrder = False
+  Height = 352
+  Width = 529
+  object ConexaoDB: TZConnection
+    ControlsCodePage = cCP_UTF16
+    AutoEncodeStrings = True
+    Catalog = ''
+    Connected = True
+    SQLHourGlass = True
+    HostName = '.\SERVERCURSO'
+    Port = 0
+    Database = 'vendas'
+    User = 'sa'
+    Password = 'mudar@123'
+    Protocol = 'mssql'
+    LibraryLocation = 'C:\Users\ll\OneDrive\Documentos\ProjetoComercial\ntwdblib.dll'
+    Left = 216
+    Top = 88
+  end
+  object QryScriptCategorias: TZQuery
+    Connection = ConexaoDB
+    Params = <>
+    Left = 392
+    Top = 104
+  end
+  object QryScriptClientes: TZQuery
+    Connection = ConexaoDB
+    Params = <>
+    Left = 200
+    Top = 216
+  end
+  object QryScriptProdutos: TZQuery
+    Connection = ConexaoDB
+    Params = <>
+    Left = 360
+    Top = 208
+  end
+  object QryScriptVendas: TZQuery
+    Connection = ConexaoDB
+    Params = <>
+    Left = 80
+    Top = 120
+  end
+  object QryScriptItensVendas: TZQuery
+    Connection = ConexaoDB
+    Params = <>
+    Left = 80
+    Top = 224
+  end
+end

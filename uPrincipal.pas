@@ -17,6 +17,7 @@ uses
   UCadCategoria,
   UCadProduto,
   UCadCliente,
+  UFrmAtualizaDB,
   Enter,
   UDTMConexao;
 
@@ -49,6 +50,7 @@ type
     { Private declarations }
     TeclaEnter: TMREnter;
     procedure ConexaoDB;
+    procedure AtualizacaoBD( Frm: TFrmAtualizaDB );
   public
     { Public declarations }
   end;
@@ -59,6 +61,33 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.AtualizacaoBD( Frm: TFrmAtualizaDB );
+begin
+  Frm.ChkConexao.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+  DtmConexao.QryScriptCategorias.ExecSQL;
+  Frm.ChkCategoria.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+  DtmConexao.QryScriptProdutos.ExecSQL;
+  Frm.ChkProduto.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+  DtmConexao.QryScriptClientes.ExecSQL;
+  Frm.ChkCliente.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+  DtmConexao.QryScriptVendas.ExecSQL;
+  Frm.ChkVendas.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+  DtmConexao.QryScriptItensVendas.ExecSQL;
+  Frm.ChkItensVendas.Checked := True;
+  Frm.Refresh;
+  Sleep( 200 );
+end;
 
 procedure TfrmPrincipal.Categoria1Click( Sender: TObject );
 begin
@@ -105,7 +134,16 @@ end;
 
 procedure TfrmPrincipal.FormCreate( Sender: TObject );
 begin
+
+  FrmAtualizaDB := TFrmAtualizaDB.Create( Self );
+  FrmAtualizaDB.Show;
+  FrmAtualizaDB.Refresh;
+
   Self.ConexaoDB;
+
+  Self.AtualizacaoBD( FrmAtualizaDB );
+  FrmAtualizaDB.Free;
+
   TeclaEnter              := TMREnter.Create( Self );
   TeclaEnter.FocusEnabled := True;
   TeclaEnter.FocusColor   := ClinfoBk;
