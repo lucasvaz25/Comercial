@@ -46,6 +46,7 @@ type
     procedure FormClose( Sender: TObject; var Action: TCloseAction );
     procedure Clientes1Click( Sender: TObject );
     procedure Produtos1Click( Sender: TObject );
+    procedure Vendas1Click( Sender: TObject );
   private
     { Private declarations }
     TeclaEnter: TMREnter;
@@ -61,6 +62,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses UProVenda;
 
 procedure TfrmPrincipal.AtualizacaoBD( Frm: TFrmAtualizaDB );
 begin
@@ -154,6 +157,13 @@ begin
   FrmCadProduto := TFrmCadProduto.Create( Self );
   FrmCadProduto.ShowModal;
   FrmCadProduto.Release;
+end;
+
+procedure TfrmPrincipal.Vendas1Click( Sender: TObject );
+begin
+  FrmProVenda := TFrmProVenda.Create( Self );
+  FrmProVenda.ShowModal;
+  FrmProVenda.Release;
 end;
 
 end.

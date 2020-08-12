@@ -1,0 +1,49 @@
+object DtmVenda: TDtmVenda
+  OldCreateOrder = False
+  Height = 457
+  Width = 616
+  object QryCliente: TZQuery
+    Connection = dtmConexao.ConexaoDB
+    SQL.Strings = (
+      'select clienteId, nome from clientes')
+    Params = <>
+    Left = 296
+    Top = 216
+    object QryClienteclienteId: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'clienteId'
+      ReadOnly = True
+    end
+    object QryClientenome: TWideStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'nome'
+      Size = 60
+    end
+  end
+  object QryProdutos: TZQuery
+    Connection = dtmConexao.ConexaoDB
+    SQL.Strings = (
+      'select produtoId, nome, valor, quantidade from produtos')
+    Params = <>
+    Left = 400
+    Top = 160
+    object QryProdutosprodutoId: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'produtoId'
+      ReadOnly = True
+    end
+    object WideStringField1: TWideStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'nome'
+      Size = 60
+    end
+    object QryProdutosvalor: TFloatField
+      DisplayLabel = 'Valor'
+      FieldName = 'valor'
+    end
+    object QryProdutosquantidade: TFloatField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'quantidade'
+    end
+  end
+end

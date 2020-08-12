@@ -62,6 +62,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState );
     procedure MskPesquisarChange( Sender: TObject );
     procedure GrdListagemDblClick( Sender: TObject );
+    procedure GrdListagemKeyDown( Sender: TObject; var Key: Word;
+      Shift: TShiftState );
   private
     { Private declarations }
     function ExisteFieldObrigatorio: Boolean;
@@ -79,6 +81,7 @@ type
     { Public declarations }
     Status: TEstadoCadastro;
     IndexAtual: String;
+    procedure BloqueiaCTRL_DEL_DBGrid( var Key: Word; Shift: TShiftState );
     function Excluir: Boolean; Virtual;
     function Gravar( Status: TEstadoCadastro ): Boolean; Virtual;
   end;
@@ -252,6 +255,12 @@ begin
   end;
 end;
 
+procedure TfrmTelaHeranca.GrdListagemKeyDown( Sender: TObject; var Key: Word;
+  Shift: TShiftState );
+begin
+  Self.BloqueiaCTRL_DEL_DBGrid( Key, Shift );
+end;
+
 procedure TfrmTelaHeranca.GrdListagemTitleClick( Column: TColumn );
 begin
   IndexAtual                  := Column.FieldName;
@@ -281,6 +290,13 @@ begin
 end;
 {$ENDREGION}
 {$REGION 'EVENTOS BOTOES'}
+
+procedure TfrmTelaHeranca.BloqueiaCTRL_DEL_DBGrid( var Key: Word;
+  Shift: TShiftState );
+begin
+  if ( Shift = [ SsCtrl ] ) and ( Key = 46 ) then
+    Key := 0;
+end;
 
 procedure TfrmTelaHeranca.BtnAlterarClick( Sender: TObject );
 begin

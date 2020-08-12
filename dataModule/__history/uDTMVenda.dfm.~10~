@@ -1,0 +1,72 @@
+object DtmVenda: TDtmVenda
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 457
+  Width = 616
+  object QryCliente: TZQuery
+    Connection = dtmConexao.ConexaoDB
+    SQL.Strings = (
+      'select clienteId, nome from clientes')
+    Params = <>
+    Left = 128
+    Top = 192
+    object QryClienteclienteId: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'clienteId'
+      ReadOnly = True
+    end
+    object QryClientenome: TWideStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'nome'
+      Size = 60
+    end
+  end
+  object QryProdutos: TZQuery
+    Connection = dtmConexao.ConexaoDB
+    SQL.Strings = (
+      'select produtoId, nome, valor, quantidade from produtos')
+    Params = <>
+    Left = 216
+    Top = 192
+    object QryProdutosprodutoId: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'produtoId'
+      ReadOnly = True
+    end
+    object WideStringField1: TWideStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'nome'
+      Size = 60
+    end
+    object QryProdutosvalor: TFloatField
+      DisplayLabel = 'Valor'
+      FieldName = 'valor'
+    end
+    object QryProdutosquantidade: TFloatField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'quantidade'
+    end
+  end
+  object CdsItensVenda: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 320
+    Top = 192
+  end
+  object DtsCliente: TDataSource
+    DataSet = QryCliente
+    Left = 128
+    Top = 256
+  end
+  object DtsProdutos: TDataSource
+    DataSet = QryProdutos
+    Left = 216
+    Top = 264
+  end
+  object DtsItensVenda: TDataSource
+    DataSet = CdsItensVenda
+    Left = 320
+    Top = 264
+  end
+end

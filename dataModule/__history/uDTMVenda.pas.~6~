@@ -1,0 +1,38 @@
+unit uDTMVenda;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Classes,
+  UDTMConexao,
+  Data.DB,
+  ZAbstractRODataset,
+  ZAbstractDataset,
+  ZDataset;
+
+type
+  TDtmVenda = class( TDataModule )
+    QryCliente: TZQuery;
+    QryClienteclienteId: TIntegerField;
+    QryClientenome: TWideStringField;
+    QryProdutos: TZQuery;
+    WideStringField1: TWideStringField;
+    QryProdutosprodutoId: TIntegerField;
+    QryProdutosvalor: TFloatField;
+    QryProdutosquantidade: TFloatField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DtmVenda: TDtmVenda;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+{$R *.dfm}
+
+end.

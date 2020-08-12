@@ -1,0 +1,73 @@
+unit uProVenda;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  UTelaHeranca,
+  Data.DB,
+  ZAbstractRODataset,
+  ZAbstractDataset,
+  ZDataset,
+  Vcl.DBCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.Buttons,
+  Vcl.Mask,
+  Vcl.ExtCtrls,
+  Vcl.ComCtrls,
+  UDTMConexao,
+  UDTMVenda, RxCurrEdit, RxToolEdit;
+
+type
+  TfrmProVenda = class( TfrmTelaHeranca )
+    QryListagemvendaId: TIntegerField;
+    QryListagemclienteId: TIntegerField;
+    QryListagemnome: TWideStringField;
+    QryListagemdataVenda: TDateTimeField;
+    QryListagemtotalVenda: TFloatField;
+    EdtVendaId: TLabeledEdit;
+    LookUpCliente: TDBLookupComboBox;
+    lblNomeCliente: TLabel;
+    edtDataVenda: TDateEdit;
+    lblDataVenda: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    edtValor: TCurrencyEdit;
+    lblValorVenda: TLabel;
+    DBGrid1: TDBGrid;
+    LookUpProduto: TDBLookupComboBox;
+    lblProdutos: TLabel;
+    edtQuantidade: TCurrencyEdit;
+    lblQuantidade: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    CurrencyEdit2: TCurrencyEdit;
+    lblVlrUnitario: TLabel;
+    lblVlrTotalProduto: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmProVenda: TfrmProVenda;
+
+implementation
+
+{$R *.dfm}
+
+end.

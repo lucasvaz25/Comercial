@@ -1,10 +1,10 @@
 inherited FrmCadCliente: TFrmCadCliente
   Caption = 'Cadastro de Clientes'
   OnCreate = FormCreate
-  ExplicitTop = -59
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgcPrincipal: TPageControl
+    ActivePage = tabManutencao
     inherited TabListagem: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
