@@ -27,6 +27,8 @@ uses
   Vcl.ComCtrls,
   UDTMConexao,
   UDTMVenda,
+  UEnum,
+  UVenda,
   RxCurrEdit,
   RxToolEdit;
 
@@ -62,10 +64,15 @@ type
     procedure FormCreate( Sender: TObject );
     procedure FormClose( Sender: TObject; var Action: TCloseAction );
     procedure DBGridItensVendaKeyDown( Sender: TObject; var Key: Word;
-      Shift: TShiftState );
+                Shift: TShiftState );
+    procedure BtnAlterarClick( Sender: TObject );
+    procedure BtnNovoClick( Sender: TObject );
   private
     { Private declarations }
     DtmVenda: TDTMVenda;
+    Venda: TVenda;
+    function Gravar( Status: TEstadoCadastro ): Boolean; override;
+    function Excluir: Boolean; override;
   public
     { Public declarations }
   end;
@@ -77,8 +84,56 @@ implementation
 
 {$R *.dfm}
 
+
+function TfrmProVenda.Excluir: Boolean;
+begin
+  Result := Venda.Excluir( QryListagem.FieldByName( 'vendaId' ).AsInteger );
+end;
+
+function TfrmProVenda.Gravar( Status: TEstadoCadastro ): Boolean;
+begin
+  if EdtVendaId.Text <> EmptyStr then
+    Venda.VendaID := StrToInt( EdtVendaId.Text )
+  else
+    Venda.VendaID := 0;
+
+  Venda.ClienteId  := LookUpCliente.KeyValue;
+  Venda.DataVenda  := EdtDataVenda.Date;
+  Venda.TotalVenda := EdtValor.Value;
+
+  if Status = EcInserir then
+    Result := Venda.Inserir
+  else if Status = EcAlterar then
+    Result := Venda.Atualizar;
+end;
+
+procedure TfrmProVenda.BtnAlterarClick( Sender: TObject );
+begin
+  if Venda.Selecionar( QryListagem.FieldByName( 'vendaId' ).AsInteger ) then
+  begin
+    EdtVendaId.Text        := IntToStr( Venda.VendaID );
+    LookUpCliente.KeyValue := Venda.ClienteId;
+    EdtDataVenda.Date      := Venda.DataVenda;
+    EdtValor.Value         := Venda.TotalVenda;
+  end
+  else
+  begin
+    BtnCancelar.Click;
+    Abort;
+  end;
+
+  inherited;
+end;
+
+procedure TfrmProVenda.BtnNovoClick( Sender: TObject );
+begin
+  inherited;
+  EdtDataVenda.Date := Date;
+  LookUpCliente.SetFocus;
+end;
+
 procedure TfrmProVenda.DBGridItensVendaKeyDown( Sender: TObject; var Key: Word;
-  Shift: TShiftState );
+            Shift: TShiftState );
 begin
   inherited;
   BloqueiaCTRL_DEL_DBGrid( Key, Shift );
@@ -89,12 +144,17 @@ begin
   inherited;
   if Assigned( DtmVenda ) then
     FreeAndNil( DtmVenda );
+
+  if Assigned( Venda ) then
+    FreeAndNil( Venda );
 end;
 
 procedure TfrmProVenda.FormCreate( Sender: TObject );
 begin
   inherited;
-  DtmVenda := TDtmVenda.Create( Self );
+  DtmVenda   := TDtmVenda.Create( Self );
+  Venda      := TVenda.Create( DtmConexao.ConexaoDB );
+  IndexAtual := 'clienteId';
 end;
 
 end.

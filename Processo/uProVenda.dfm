@@ -1,13 +1,16 @@
 inherited frmProVenda: TfrmProVenda
   Caption = 'Vendas'
   OnCreate = FormCreate
+  ExplicitTop = -76
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgcPrincipal: TPageControl
     ActivePage = tabManutencao
-    ExplicitLeft = -24
-    ExplicitTop = -16
     inherited TabListagem: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 817
+      ExplicitHeight = 363
       inherited grdListagem: TDBGrid
         Columns = <
           item
@@ -39,7 +42,7 @@ inherited frmProVenda: TfrmProVenda
       end
     end
     inherited tabManutencao: TTabSheet
-      ExplicitTop = 28
+      ExplicitTop = 24
       object lblNomeCliente: TLabel
         Left = 162
         Top = 17
@@ -92,7 +95,6 @@ inherited frmProVenda: TfrmProVenda
         Height = 291
         Align = alBottom
         TabOrder = 3
-        ExplicitTop = 76
         object Panel2: TPanel
           Left = 1
           Top = 1
@@ -243,9 +245,6 @@ inherited frmProVenda: TfrmProVenda
           Height = 191
           Align = alClient
           TabOrder = 1
-          ExplicitLeft = 3
-          ExplicitTop = 42
-          ExplicitHeight = 207
           object DBGridItensVenda: TDBGrid
             Left = 1
             Top = 1
@@ -316,8 +315,6 @@ inherited frmProVenda: TfrmProVenda
           Height = 41
           Align = alBottom
           TabOrder = 2
-          ExplicitLeft = 3
-          ExplicitTop = 248
           object lblValorVenda: TLabel
             Left = 554
             Top = 6

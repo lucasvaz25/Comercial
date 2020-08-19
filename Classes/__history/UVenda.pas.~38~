@@ -1,0 +1,211 @@
+unit UVenda;
+
+interface
+
+uses
+  System.Classes,
+  System.SysUtils,
+  Vcl.Controls,
+  Vcl.ExtCtrls,
+  ZAbstractConnection,
+  ZConnection,
+  ZAbstractRODataset,
+  ZAbstractDataset,
+  ZDataset,
+  Vcl.Dialogs;
+
+type
+  TVenda = Class
+  private
+    ConnectionDB: TZConnection;
+    FDataVenda: TDateTime;
+    FTotalVenda: Double;
+    FVendaID: Integer;
+    FClienteId: Integer;
+    procedure SetClienteId( const Value: Integer );
+    procedure SetDataVenda( const Value: TDateTime );
+    procedure SetTotalVenda( const Value: Double );
+    procedure SetVendaID( const Value: Integer );
+
+  public
+    constructor Create( _ConnectionDB: TZConnection );
+    destructor Destroy; Override;
+
+    function Inserir: Boolean;
+    function Atualizar: Boolean;
+    function Excluir( ID: Integer ): Boolean;
+    function Selecionar( ID: Integer ): Boolean;
+
+  published
+    property VendaID: Integer read FVendaID write SetVendaID;
+    property ClienteId: Integer read FClienteId write SetClienteId;
+    property DataVenda: TDateTime read FDataVenda write SetDataVenda;
+    property TotalVenda: Double read FTotalVenda write SetTotalVenda;
+  End;
+
+implementation
+
+{ TCategoria }
+
+{$REGION 'Contructor and destructor'}
+
+
+constructor TVenda.Create( _ConnectionDB: TZConnection );
+begin
+  ConnectionDB := _ConnectionDB;
+end;
+
+destructor TVenda.Destroy;
+begin
+
+  inherited;
+end;
+{$ENDREGION}
+{$REGION 'CRUD'}
+
+
+function TVenda.Atualizar: Boolean;
+var
+  Qry: TZQuery;
+begin
+  try
+    Result         := True;
+    Qry            := TZQuery.Create( nil );
+    Qry.Connection := ConnectionDB;
+    Qry.SQL.Clear;
+    Qry.SQL.Add( 'UPDATE vendas SET clienteId = :clienteId, ' );
+    Qry.SQL.Add( 'dataVenda = :dataVenda, totalVenda = :totalVenda ' );
+    Qry.SQL.Add( ' WHERE categoria = :categoria' );
+    Qry.ParamByName( 'vendaId' ).AsInteger    := Self.FVendaId;
+    Qry.ParamByName( 'clienteId' ).AsInteger  := Self.FClienteId;
+    Qry.ParamByName( 'dataVenda' ).AsDateTime := Self.FdataVenda;
+    Qry.ParamByName( 'totalVenda' ).AsFloat   := Self.FtotalVenda;
+    try
+      Qry.ExecSQL;
+    Except
+      Result := False;
+    end;
+  finally
+    if Assigned( Qry ) then
+      FreeAndNil( Qry );
+  end;
+end;
+
+function TVenda.Excluir( ID: Integer ): Boolean;
+var
+  Qry: TZQuery;
+begin
+  if MessageDlg( 'Apagar o Registro: ' + #13 + #13 + 'Venda Nro: ' + IntToStr( Self.FVendaId ), MtConfirmation, [ MbYes, MbNo ], 0 ) = MrNo then
+  begin
+    Result := False;
+    Abort;
+  end;
+
+  try
+    Result         := True;
+    Qry            := TZQuery.Create( nil );
+    Qry.Connection := ConnectionDB;
+    Qry.SQL.Clear;
+    Qry.SQL.Add( 'DELETE FROM vendasItens ' );
+    Qry.SQL.Add( 'WHERE vendaId = :vendaId' );
+    Qry.ParamByName( 'vendaID' ).AsInteger := ID;
+    try
+      Qry.ExecSQL;
+      Qry.SQL.Clear;
+      Qry.SQL.Add( 'DELETE FROM vendas ' );
+      Qry.SQL.Add( 'WHERE vendaId = :vendaId' );
+      Qry.ParamByName( 'vendaID' ).AsInteger := ID;
+      Qry.ExecSQL;
+    Except
+      Result := False;
+    end;
+  finally
+    if Assigned( Qry ) then
+      FreeAndNil( Qry );
+  end;
+end;
+
+function TVenda.Inserir: Boolean;
+var
+  Qry: TZQuery;
+  IdVendaGerado: Integer;
+begin
+  try
+    Result := True;
+    ConnectionDB.StartTransaction;
+    Qry            := TZQuery.Create( nil );
+    Qry.Connection := ConnectionDB;
+    Qry.SQL.Clear;
+    Qry.SQL.Add( 'INSERT INTO vendas (clienteId, dataVenda, totalVenda) values (:clienteId, :dataVenda, :totalVenda)' );
+    Qry.ParamByName( 'clienteId' ).AsInteger  := Self.FClienteId;
+    Qry.ParamByName( 'dataVenda' ).AsDateTime := Self.FDataVenda;
+    Qry.ParamByName( 'totalVenda' ).AsFloat   := Self.FTotalVenda;
+    try
+      Qry.ExecSQL;
+      Qry.SQL.Clear;
+      Qry.SQL.Add( 'SELECT SCOPE_IDENTITY() AS ID' );
+      Qry.Open;
+      IdVendaGerado := Qry.FieldByName( 'ID' ).AsInteger;
+      ConnectionDB.Commit;
+    Except
+      ConnectionDB.Rollback;
+      Result := False;
+    end;
+  finally
+    if Assigned( Qry ) then
+      FreeAndNil( Qry );
+  end;
+end;
+
+function TVenda.Selecionar( ID: Integer ): Boolean;
+var
+  Qry: TZQuery;
+begin
+  try
+    Result         := True;
+    Qry            := TZQuery.Create( nil );
+    Qry.Connection := ConnectionDB;
+    Qry.SQL.Clear;
+    Qry.SQL.Add( 'SELECT vendaId, clienteId, dataVenda, totalVenda FROM vendas' );
+    Qry.SQL.Add( 'WHERE vendaId = :vendaId' );
+    Qry.ParamByName( 'vendaId' ).AsInteger := ID;
+    try
+      Qry.Open;
+      Self.FCodigo    := Qry.FieldByName( 'categoria' ).AsInteger;
+      Self.FDescricao := Qry.FieldByName( 'descricao' ).AsString;
+    Except
+      Result := False;
+    end;
+  finally
+    if Assigned( Qry ) then
+      FreeAndNil( Qry );
+  end;
+end;
+
+{$ENDREGION}
+{$REGION 'GETs and SETs'}
+
+
+procedure TVenda.SetClienteId( const Value: Integer );
+begin
+  FClienteId := Value;
+end;
+
+procedure TVenda.SetDataVenda( const Value: TDateTime );
+begin
+  FDataVenda := Value;
+end;
+
+procedure TVenda.SetTotalVenda( const Value: Double );
+begin
+  FTotalVenda := Value;
+end;
+
+procedure TVenda.SetVendaID( const Value: Integer );
+begin
+  FVendaID := Value;
+end;
+
+{$ENDREGION}
+
+end.
